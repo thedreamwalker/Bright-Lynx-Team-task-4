@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>тестовое задание 4</title>
+</head>
+<body>
+    
+  <div class="wrap">
+    <div class="chessboard" id="board">
+
+    </div>
+  </div>
+  <style>
+    .wrap {
+      margin: 10px auto;
+      padding: 60px;
+      width: 640px;
+      height: 640px;
+      border: 1px solid black;
+    }
+
+    .chessboard {
+      display: flex;
+      flex-wrap: wrap;
+      margin: auto auto;
+      width: 640px;
+      height: 640px;
+      background-color: white;
+      box-shadow: 0 0 1px gray;
+    }
+
+    .cell {
+      width: 80px;
+      height: 80px;
+      box-shadow: 0 0 1px gray;
+    }
+
+    .blackcell {
+      background-color: #000000;
+    }
+
+    .knight {
+      background-color: blue;
+    }
+
+    .allMoves {
+      background-color: green;
+    }
+  </style>
+  
+
+  <script>
+    let chessboard = document.getElementsByClassName('chessboard');
+    // создаем ячейки на доске и присваиваем им класс
+    for (let i = 1; i <= 64; i++) {
+      let cellAd = document.createElement('div');
+      board.appendChild(cellAd);
+      cellAd.classList.add('cell');
+    }
+    // перебираем массив ячеек, задаем координаты, вешаем слушатель и окрашиваем нужные клетки в черный цвет
+    let allcell = document.getElementsByClassName('cell');
+    let x = 1; let y = 8;
+    for (let i = 0; i < allcell.length; i++) {
+      if (x > 8) {
+        x=1;
+        y--
+      }
+      allcell[i].setAttribute('coordx', x);
+      allcell[i].setAttribute('coordy', y);
+      allcell[i].addEventListener( 'click', showMoves);
+      x++
+     if (i%2==0 && y%2 !== 0 || i%2!==0 && y%2== 0) {
+      allcell[i].classList.add('blackcell');
+      }
+    }
+    // сначала чистим клетки от доп.классов после возможного предшествующего клика
+    function showMoves () {
+      document.querySelectorAll('.cell').forEach(function (element) {
+        element.classList.remove('allMoves');
+        element.classList.remove('knight');
+    });
+      // получаем координаты кликнутой клетки
+      this.classList.add('knight');
+      let x = parseInt(this.getAttribute('coordx'));
+      let y = parseInt(this.getAttribute('coordy'));
+      // массив возможных ходов коня
+      const knightMoves = [
+        {x:2, y:-1},{x:2, y:1},{x:1, y:-2},{x:1, y:2},
+        {x:-2, y:-1},{x:-2, y:1},{x:-1, y:-2},{x:-1, y:2}
+      ]
+      // перебор массива ходов и сложение с исходными координатами, подсветка клеток ходов.
+      for(let m of knightMoves) {
+        if ((x + m.x <= 8 && x + m.x > 0) && (y + m.y <= 8 && y + m.y > 0)) {
+          let row = x + m.x;
+          let column = y + m.y;
+          document.querySelector(`.cell[coordx = '${row}'][coordy = '${column}']`).classList.add('allMoves');
+        }
+      }
+  
+}
+
+  </script>
+  </body>
+
+</html>
