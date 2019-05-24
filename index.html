@@ -7,17 +7,96 @@
 <body>
     
   <div class="wrap">
-    <div class="chessboard" id="board">
-
+    <div class="letters top">
+      <div>A</div>
+      <div>B</div>
+      <div>C</div>
+      <div>D</div>
+      <div>E</div>
+      <div>F</div>
+      <div>G</div>
+      <div>H</div>
+    </div>
+   <div class="numbers left">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+      <div>7</div>
+      <div>8</div>
+    </div>
+    <div class="chessboard" id="board"></div>
+    <div class="letters bottom">
+      <div>A</div>
+      <div>B</div>
+      <div>C</div>
+      <div>D</div>
+      <div>E</div>
+      <div>F</div>
+      <div>G</div>
+      <div>H</div>
+    </div>
+    <div class="numbers right">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+      <div>7</div>
+      <div>8</div>
     </div>
   </div>
   <style>
     .wrap {
+      position: relative;
       margin: 10px auto;
       padding: 60px;
       width: 640px;
       height: 640px;
       border: 1px solid black;
+    }
+
+    .letters {
+      position: absolute;
+      display: flex;
+      left: 85px;
+    }
+
+    .top {
+      top: 20px;
+    }
+
+    .bottom {
+      bottom: 20px;
+    }
+
+    .letters div {
+      width: 80px;
+      font-size: 25px;
+    }
+
+    .numbers {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      width: 50px;
+      top: 85px;
+    }
+
+    .left {
+      left: 25px;
+    }
+
+    .right {
+      right: -10px;
+    }
+
+    .numbers div {
+      height: 80px;
+      font-size: 25px;
     }
 
     .chessboard {
